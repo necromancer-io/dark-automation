@@ -11,17 +11,22 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
+        cache: 'pip'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install flake8
+        echo "Dependencies installed successfully"
     - name: Lint with flake8
       run: |
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics || true
     - name: Test main.py
-      run: python main.py
+      run: |
+        echo "Testing main.py functionality..."
+        python main.py
+        echo "Main.py executed successfully"
     - name: Success
       run: echo "✅ All checks passed!"

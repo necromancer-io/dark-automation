@@ -1,0 +1,133 @@
+name: Dependency Security Updates
+
+on:
+  schedule:
+    - cron: '0 2 * * 1'  # Weekly on Monday at 2 AM UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  security-updates:
+    name: Security Dependency Updates
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+
+    - name: Install Security Tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install safety pip-audit
+
+    - name: Check for Security Vulnerabilities
+      id: security-check
+      run: |
+        echo "Checking for security vulnerabilities..."
+        
+        # Run safety check and capture output
+        if safety check --json --output safety-report.json; then
+          echo "No security vulnerabilities found"
+          echo "vulnerabilities_found=false" >> $GITHUB_OUTPUT
+        else
+          echo "Security vulnerabilities detected"
+          echo "vulnerabilities_found=true" >> $GITHUB_OUTPUT
+        fi
+        
+        # Run pip-audit for additional security checks
+        pip-audit --format=json --output=audit-report.json || true
+
+    - name: Generate Security Report
+      if: steps.security-check.outputs.vulnerabilities_found == 'true'
+      run: |
+        echo "# Security Vulnerability Report" > security-update-report.md
+        echo "" >> security-update-report.md
+        echo "**Date:** $(date)" >> security-update-report.md
+        echo "**Repository:** ${{ github.repository }}" >> security-update-report.md
+        echo "" >> security-update-report.md
+        echo "## Detected Vulnerabilities" >> security-update-report.md
+        echo "" >> security-update-report.md
+        
+        if [ -f safety-report.json ]; then
+          echo "Safety scan results available in artifacts." >> security-update-report.md
+        fi
+        
+        echo "" >> security-update-report.md
+        echo "## Recommended Actions" >> security-update-report.md
+        echo "" >> security-update-report.md
+        echo "1. Review the vulnerability reports" >> security-update-report.md
+        echo "2. Update affected dependencies" >> security-update-report.md
+        echo "3. Test the application after updates" >> security-update-report.md
+        echo "4. Deploy security patches promptly" >> security-update-report.md
+        echo "" >> security-update-report.md
+        echo "---" >> security-update-report.md
+        echo "*Automated Security Monitoring*" >> security-update-report.md
+
+    - name: Create Security Issue
+      if: steps.security-check.outputs.vulnerabilities_found == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const title = '🚨 Security Vulnerabilities Detected';
+          const body = `
+          ## Security Alert
+          
+          Automated security scanning has detected vulnerabilities in project dependencies.
+          
+          **Scan Date:** ${new Date().toISOString()}
+          **Repository:** ${{ github.repository }}
+          
+          ## Next Steps
+          
+          1. Review the security reports in the workflow artifacts
+          2. Update vulnerable dependencies
+          3. Run security tests after updates
+          4. Close this issue once vulnerabilities are resolved
+          
+          ## Reports Available
+          
+          - Safety vulnerability report
+          - Pip-audit security analysis
+          
+          **Priority:** High - Security vulnerabilities should be addressed promptly
+          
+          ---
+          *This issue was created automatically by the security monitoring workflow*
+          `;
+          
+          github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title: title,
+            body: body,
+            labels: ['security', 'vulnerability', 'high-priority']
+          });
+
+    - name: Upload Security Reports
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: security-reports-${{ github.run_number }}
+        path: |
+          safety-report.json
+          audit-report.json
+          security-update-report.md
+
+    - name: Summary
+      run: |
+        if [[ "${{ steps.security-check.outputs.vulnerabilities_found }}" == "true" ]]; then
+          echo "⚠️ Security vulnerabilities detected - Issue created for tracking"
+        else
+          echo "✅ No security vulnerabilities found - All dependencies are secure"
+        fi

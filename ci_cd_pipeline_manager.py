@@ -32,7 +32,7 @@ class PipelineStage(Enum):
     TEST = "test"
     SECURITY_SCAN = "security_scan"
     QUALITY_GATE = "quality_gate"
-    PACKAGE = "build"
+    BUILD = "build"
     DEPLOY_STAGING = "deploy_staging"
     INTEGRATION_TEST = "integration_test"
     DEPLOY_PRODUCTION = "deploy_production"

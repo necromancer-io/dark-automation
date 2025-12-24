@@ -9,6 +9,12 @@
   - CI/CD pipeline architecture
   - Multi-cloud orchestration systems
 
+- **necromancer-io** - DevOps & Automation Specialist
+  - DevOps pipeline optimization
+  - Infrastructure automation and orchestration
+  - Cloud resource management and optimization
+  - Enterprise deployment strategies
+
 ### Automated Contributors
 - **dependabot[bot]** - Dependency Management
   - Automated security updates

@@ -13,7 +13,7 @@
 - **dependabot[bot]** - Dependency Management
   - Automated security updates
   - Dependency vulnerability scanning
-  - Package version management
+  - Dependency version management
 
 - **actions-user** - CI/CD Automation
   - Automated workflow execution

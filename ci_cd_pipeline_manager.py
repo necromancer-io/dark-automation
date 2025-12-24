@@ -32,7 +32,7 @@ class PipelineStage(Enum):
     TEST = "test"
     SECURITY_SCAN = "security_scan"
     QUALITY_GATE = "quality_gate"
-    PACKAGE = "package"
+    PACKAGE = "build"
     DEPLOY_STAGING = "deploy_staging"
     INTEGRATION_TEST = "integration_test"
     DEPLOY_PRODUCTION = "deploy_production"
@@ -556,7 +556,7 @@ class CICDPipelineManager:
         """Simulate deployment command execution."""
         logs = [
             "Starting deployment process...",
-            "Preparing deployment package...",
+            "Preparing deployment build...",
             "Uploading artifacts to registry...",
             "Updating infrastructure configuration...",
             "Rolling out new version...",

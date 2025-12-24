@@ -74,7 +74,7 @@ To deliver robust, secure, and scalable automation solutions that enable organiz
 - **Docker**: Containerization and application packaging
 - **Kubernetes**: Container orchestration and management
 - **Terraform**: Infrastructure as Code provisioning
-- **Helm**: Kubernetes package management and deployment
+- **Helm**: Kubernetes deployment management
 
 ### Monitoring & Security
 - **Prometheus**: Metrics collection and monitoring

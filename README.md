@@ -1,9 +1,33 @@
 # Dark Automation Fork
 
-[![Security Audit](https://github.com/uldyssian-sh/dark-automation-fork/actions/workflows/security-audit.yml/badge.svg)](https://github.com/uldyssian-sh/dark-automation-fork/actions/workflows/security-audit.yml)
-[![Docker Build](https://github.com/uldyssian-sh/dark-automation-fork/actions/workflows/docker-build.yml/badge.svg)](https://github.com/uldyssian-sh/dark-automation-fork/actions/workflows/docker-build.yml)
-[![Code Quality](https://github.com/uldyssian-sh/dark-automation-fork/actions/workflows/code-quality.yml/badge.svg)](https://github.com/uldyssian-sh/dark-automation-fork/actions/workflows/code-quality.yml)
+[![Enterprise CI/CD](https://github.com/uldyssian-sh/dark-automation/actions/workflows/enterprise-ci-cd.yml/badge.svg)](https://github.com/uldyssian-sh/dark-automation/actions/workflows/enterprise-ci-cd.yml)
+[![Simple CI](https://github.com/uldyssian-sh/dark-automation/actions/workflows/simple-ci.yml/badge.svg)](https://github.com/uldyssian-sh/dark-automation/actions/workflows/simple-ci.yml)
+[![Dependency Updates](https://github.com/uldyssian-sh/dark-automation/actions/workflows/dependency-update.yml/badge.svg)](https://github.com/uldyssian-sh/dark-automation/actions/workflows/dependency-update.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Security](https://img.shields.io/badge/Security-Enterprise-green.svg)](https://github.com/uldyssian-sh/dark-automation/security)
+[![GitHub release](https://img.shields.io/github/v/release/uldyssian-sh/dark-automation)](https://github.com/uldyssian-sh/dark-automation/releases)
+
+## 📋 About
+
+**Dark Automation Fork** is a comprehensive enterprise-grade automation and infrastructure management platform designed for modern multi-cloud environments. This platform provides advanced automation capabilities, intelligent resource optimization, and robust security features for large-scale enterprise operations.
+
+### 🎯 Purpose
+- **Infrastructure Automation**: Multi-cloud deployment and management automation
+- **Process Optimization**: Intelligent workflow automation and resource optimization
+- **Security Integration**: Enterprise-grade security scanning and compliance monitoring
+- **Scalable Operations**: High-performance distributed task processing and orchestration
+
+### 🏢 Target Audience
+- **DevOps Engineers**: Advanced infrastructure automation and CI/CD pipeline management
+- **Cloud Architects**: Multi-cloud strategy implementation and optimization
+- **Enterprise IT**: Large-scale automation and infrastructure management
+- **Security Teams**: Automated security scanning and compliance monitoring
+
+### 🔧 Core Technologies
+- **Python 3.11+**: Modern Python with enterprise automation features
+- **Multi-Cloud Support**: AWS, Azure, GCP integration and orchestration
+- **Container Orchestration**: Docker and Kubernetes for scalable deployments
+- **Advanced Monitoring**: Prometheus, Grafana, and ELK stack integration
 
 Enterprise-grade automation and infrastructure management platform with advanced security, scalability, and multi-cloud orchestration capabilities.
 

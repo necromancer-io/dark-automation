@@ -629,7 +629,6 @@ jobs:
         with:
           status: failure
           channel: '#security-alerts'
-          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
           fields: repo,message,commit,author
           custom_payload: |
             {
@@ -657,6 +656,8 @@ jobs:
                 }
               ]
             }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
 
       - name: Create Security Issue
         if: steps.security-score.outputs.score < 75
